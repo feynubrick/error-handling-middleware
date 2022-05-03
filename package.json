@@ -1,0 +1,16 @@
+{
+  "name": "error-handling-middleware",
+  "version": "1.0.0",
+  "description": "미들웨어를 사용해서 에러 핸들링 하는 것이 되는지 실험해보는 프로젝트입니다.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Seung-Yoon Oh",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.1",
+    "express-async-errors": "^3.1.1"
+  },
+  "type": "commonjs"
+}
