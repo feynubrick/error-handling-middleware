@@ -1,25 +1,18 @@
 const express = require('express');
 require('express-async-errors');
+const { requestLogger, errorLogger, errorResponser } = require('./middlewares');
 const { healthChecker, syncError, asyncError } = require('./controllers');
 const app = express();
 const port = 3000;
 
-const errorlogger = (err, req, res, next) => {
-  console.log('REQ path:', req.path);
-  console.log('REQ method:', req.method);
-  console.log('REQ query:', req.query);
-  console.error('syoh', err.stack);
-  next(err);
-};
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-const errorResponser = (err, req, res, next) => {
-  res.status(500).send({ message: err.message });
-};
-
+app.use(requestLogger);
 app.get('/', healthChecker);
 app.get('/sync-error', syncError);
 app.get('/async-error', asyncError);
-app.use(errorlogger);
+app.use(errorLogger);
 app.use(errorResponser);
 
 app.listen(port, () => {
